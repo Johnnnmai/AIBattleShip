@@ -32,8 +32,8 @@ class CheatingAi(AIPlayer):
     def get_orientation(self, ship_: ship.Ship) -> orientation.Orientation:
         return super().get_orientation(ship_)
 
-    def get_start_coords(self, ship_: ship.Ship):
-        return super().get_start_coords(ship_)
+    def get_start_coords(self, ship_: ship.Ship, config):
+        return super().get_start_coords(ship_, None)
 
     def all_ships_sunk(self) -> bool:
         return super().all_ships_sunk()

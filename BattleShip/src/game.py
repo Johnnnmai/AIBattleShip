@@ -5,6 +5,7 @@ from.humanplayer import HumanPlayer
 from.random_ai import Random_Ai
 from.search_destory_ai import Search_Desotry_Ai
 from.cheating_ai import CheatingAi
+from.board import Board
 from.player import Player
 from typing import Iterable,TypeVar,Optional,Type
 import random

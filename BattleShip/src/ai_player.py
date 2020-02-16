@@ -3,7 +3,7 @@ from typing import List
 from . import move
 from BattleShip.src import move, ship, orientation, game_config, game
 from.player import Player
-from. import board
+from .board import Board
 
 
 class AIPlayer(Player):
@@ -17,7 +17,7 @@ class AIPlayer(Player):
         player_type = "Aiplayer"
 
         while True:
-            self.name = player_type + " "+ str((player_num))
+            self.name = player_type + " " + str((player_num))
             if self.name not in other_players_names:
                 return self.name
 
@@ -36,19 +36,33 @@ class AIPlayer(Player):
         return super().get_ship_placement(ship_)
 
     def get_orientation(self, ship_: ship.Ship) -> orientation.Orientation:
-        return super().get_orientation(ship_)
+
+        #Randomly select horizontal or vertical
+        possible_orientation_ = ['horizontal', 'vertical']
+        orientation_ = random.choice(possible_orientation_)
+
+        return orientation.Orientation.from_string(orientation_)
 
     def get_start_coords(self, ship_: ship.Ship):
-        return super().get_start_coords(ship_)
+        #return super().get_start_coords(ship_)
+
+        #self.num_rows
+        #self.num_cols
+        row = random.randint(0, 5)
+        col = random.randint(0, 6)
+        return row, col
+
 
     def all_ships_sunk(self) -> bool:
         return super().all_ships_sunk()
 
-    def get_move(self, the_board:"board.Board") -> move.Move:
-        empty_coordinates = the_board.get_empty_coordinates()
+    def get_move(self, board: "board.Board") -> "Move":
+        empty_coordinates = board.get_empty_coordinates()
 
         coord = random.choice(empty_coordinates)
-        return move.Move(self, *coord)
+        firing_location = move.Move.from_str(self, *coord)
+
+        return firing_location
 
 
     def fire_at(self, row: int, col: int) -> None:

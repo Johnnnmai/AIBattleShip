@@ -21,7 +21,7 @@ class HumanPlayer(Player):
         for opponent in other_players:
             opponent.add_opponent(self)
 
-    def init_name(self, player_num: int, other_players: List["Player"]) -> None:
+    def init_name(self, player_num: int, other_players: List["Player"], player_type) -> None:
         while True:
             self.name = input(f'Player {player_num} please enter your name: ').strip()
             if self in other_players:

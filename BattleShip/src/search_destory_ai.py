@@ -11,8 +11,8 @@ class Search_Desotry_Ai(AIPlayer):
     def init_name(self, player_num: int, other_players: List["Player"], player_type) -> None:
 
         other_players_names = [player.name for player in other_players]
-        player_type == "Search Destroy AI"
-        
+        player_type = "Search Destroy AI"
+
         while True:
             self.name = player_type + " " + str((player_num))
             if self.name not in other_players_names:
@@ -34,8 +34,8 @@ class Search_Desotry_Ai(AIPlayer):
     def get_orientation(self, ship_: ship.Ship) -> orientation.Orientation:
         return super().get_orientation(ship_)
 
-    def get_start_coords(self, ship_: ship.Ship):
-        return super().get_start_coords(ship_)
+    def get_start_coords(self, ship_: ship.Ship, config):
+        return super().get_start_coords(ship_, None)
 
     def all_ships_sunk(self) -> bool:
         return super().all_ships_sunk()
