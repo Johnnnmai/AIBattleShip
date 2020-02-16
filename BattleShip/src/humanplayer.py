@@ -2,20 +2,20 @@ from typing import Dict, List
 import copy
 from . import game_config, board, ship, orientation, ship_placement, move
 from .firing_location_error import FiringLocationError
+from .player import Player
 
-
-class Player(object):
+class HumanPlayer(Player):
     opponents: List["Player"]
     ships: Dict[str, ship.Ship]
 
     def __init__(self, player_num: int, config: game_config.GameConfig, other_players: List["Player"]) -> None:
-        super().__init__()
-        self.name = 'No Name'
-        self.init_name(player_num, other_players)
-        self.board = board.Board(config)
-        self.opponents = other_players[:]  # a copy of other players
-        self.ships = copy.deepcopy(config.available_ships)
-        self.place_ships()
+        super().__init__(player_num, config, other_players)
+        #self.name = 'No Name'
+        #self.init_name(player_num, other_players)
+        #self.board = board.Board(config)
+        #self.opponents = other_players[:]  # a copy of other players
+        #self.ships = copy.deepcopy(config.available_ships)
+        #self.place_ships()
 
         # make this player the opponent of all the other players
         for opponent in other_players:
@@ -91,7 +91,7 @@ class Player(object):
     def all_ships_sunk(self) -> bool:
         return all(ship_.health == 0 for ship_ in self.ships.values())
 
-    def get_move(self) -> move.Move:
+    def get_move(self, board) -> move.Move:
         while True:
             coords = input(f'{self.name}, enter the location you want to fire at in the form row, column: ')
             try:
@@ -126,7 +126,7 @@ class Player(object):
             print('Miss')
 
     def __eq__(self, other: object) -> bool:
-        if not isinstance(other, Player):
+        if not isinstance(other, HumanPlayer):
             return False
         else:
             return self.name == other.name
