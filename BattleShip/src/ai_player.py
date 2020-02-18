@@ -1,9 +1,9 @@
 import random
 from typing import List
 from . import move
-from BattleShip.src import move, ship, orientation, game_config, game
+from BattleShip.src import move, ship, orientation, game_config, game,board
 from.player import Player
-from .board import Board
+
 
 
 class AIPlayer(Player):
@@ -48,21 +48,31 @@ class AIPlayer(Player):
 
         #self.num_rows
         #self.num_cols
-        row = random.randint(0, 5)
-        col = random.randint(0, 6)
+        row = random.randint(0, self.board.num_rows)
+        col = random.randint(0, self.board.num_cols)
+
+
         return row, col
 
 
     def all_ships_sunk(self) -> bool:
         return super().all_ships_sunk()
 
-    def get_move(self, board: "board.Board") -> "Move":
-        empty_coordinates = board.get_empty_coordinates()
+    def get_move(self, the_board: "board.Board") -> "Move":
 
-        coord = random.choice(empty_coordinates)
-        firing_location = move.Move.from_str(self, *coord)
-
-        return firing_location
+        while True:
+            row = random.randint(0, self.board.num_rows)
+            col = random.randint(0, self.board.num_cols)
+            print(row)
+            print(col)
+            coords = str(row)+","+str(col)
+            print(coords)
+            try:
+                firing_location = move.Move.from_str(self, coords)
+            except ValueError as e:
+                print(e)
+                continue
+            return firing_location
 
 
     def fire_at(self, row: int, col: int) -> None:

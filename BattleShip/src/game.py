@@ -34,7 +34,7 @@ class Game(object):
         print(f'{active_player} won the game!')
 
     #cur_player:humanplayer.HumanPlayer 修改前
-    def do_current_players_turn(self, cur_player: humanplayer.HumanPlayer) -> None:
+    def do_current_players_turn(self, cur_player: Player) -> None:
         self.display_gamestate(cur_player)
         while True:
             move = cur_player.get_move(None)

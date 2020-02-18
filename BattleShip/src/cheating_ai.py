@@ -1,7 +1,7 @@
 from typing import List
 
 from BattleShip.src import move, ship, orientation, game_config
-
+import random
 from .ai_player import AIPlayer
 
 class CheatingAi(AIPlayer):
@@ -39,7 +39,20 @@ class CheatingAi(AIPlayer):
         return super().all_ships_sunk()
 
     def get_move(self, the_board: "board.Board") -> move.Move:
-        return super().get_move(the_board)
+
+        while True:
+            row = self.board.get_ship_location_row()
+            col = self.board.get_ship_location_col()
+            print(row)
+            print(col)
+            coords = str(row) + "," + str(col)
+            print(coords)
+            try:
+                firing_location = move.Move.from_str(self, coords)
+            except ValueError as e:
+                print(e)
+                continue
+            return firing_location
 
     def fire_at(self, row: int, col: int) -> None:
         super().fire_at(row, col)

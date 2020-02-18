@@ -1,5 +1,5 @@
 from typing import Set, List, Tuple
-from . import ship_placement, orientation, game_config, cell, move
+from . import ship_placement, orientation, game_config, cell, move,ship
 from .cell import Cell
 
 
@@ -94,3 +94,25 @@ class Board(object):
                     empty_coords.append((row, col))
 
         return empty_coords
+
+    def get_ship_location_row(self) :
+        ship_location_row = []
+
+        for row in range(self.num_rows):
+            for col in range(self.num_cols):
+                if [row][col] == ship.get_initial:
+                    ship_location_row.append((row))
+
+        return ship_location_row
+
+    def get_ship_location_col(self, ship_: ship.Ship):
+
+        ship_location_col = []
+
+        for row in range(self.num_rows+1):
+            for col in range(self.num_cols+1):
+                if [row][col] == ship.get_initial:
+
+                    ship_location_col.append((col))
+
+        return ship_location_col

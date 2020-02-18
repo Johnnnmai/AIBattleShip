@@ -9,6 +9,10 @@ class Ship(object):
     def __str__(self) -> str:
         return self.name
 
+    def get_initial(self) -> str :
+
+        return self.initial
+
     def damage(self) -> None:
         self.health -= 1
 
