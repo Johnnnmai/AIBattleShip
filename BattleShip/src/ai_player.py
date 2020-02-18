@@ -65,7 +65,7 @@ class AIPlayer(Player):
             col = random.randint(0, self.board.num_cols)
             print(row)
             print(col)
-            coords = str(row)+","+str(col)
+            coords =  str(col) + "," + str(row)
             print(coords)
             try:
                 firing_location = move.Move.from_str(self, coords)

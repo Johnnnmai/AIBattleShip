@@ -40,19 +40,21 @@ class CheatingAi(AIPlayer):
 
     def get_move(self, the_board: "board.Board") -> move.Move:
 
-        while True:
-            row = self.board.get_ship_location_row()
-            col = self.board.get_ship_location_col()
-            print(row)
-            print(col)
-            coords = str(row) + "," + str(col)
-            print(coords)
+
+
+        row = self.board.get_ship_location_row()
+        col = self.board.get_ship_location_col()
+
+        for i in range(len(row)):
+            coords =  str(col[i]) + "," + str(row[i])
+
             try:
                 firing_location = move.Move.from_str(self, coords)
             except ValueError as e:
                 print(e)
                 continue
             return firing_location
+
 
     def fire_at(self, row: int, col: int) -> None:
         super().fire_at(row, col)

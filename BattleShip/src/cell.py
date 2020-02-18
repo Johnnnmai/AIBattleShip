@@ -19,7 +19,7 @@ class Cell(object):
         self.has_been_fired_at = True
 
     def contains_ship(self) -> bool:
-        return self.content != self.empty_marker
+        return self.content != self.empty_marker and self.content != self.hit_marker and self.content != self.miss_marker
 
     def __str__(self) -> str:
         return self.content

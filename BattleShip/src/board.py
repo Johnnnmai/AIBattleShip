@@ -95,24 +95,23 @@ class Board(object):
 
         return empty_coords
 
-    def get_ship_location_row(self) :
+    def get_ship_location_row(self):
         ship_location_row = []
 
         for row in range(self.num_rows):
             for col in range(self.num_cols):
-                if [row][col] == ship.get_initial:
-                    ship_location_row.append((row))
+                if self.coords_contains_ship(row, col):
+                    ship_location_row.append(row)
 
         return ship_location_row
 
-    def get_ship_location_col(self, ship_: ship.Ship):
 
+    def get_ship_location_col(self):
         ship_location_col = []
-
-        for row in range(self.num_rows+1):
-            for col in range(self.num_cols+1):
-                if [row][col] == ship.get_initial:
-
-                    ship_location_col.append((col))
+        for row in range(self.num_rows):
+            for col in range(self.num_cols):
+                if self.coords_contains_ship(row, col):
+                    ship_location_col.append(col)
 
         return ship_location_col
+
